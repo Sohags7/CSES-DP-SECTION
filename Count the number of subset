@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <map>
+#include <queue>
+#include <string.h>
+#include <algorithm>
+
+#define ll long long 
+using namespace std;
+
+int n,w;
+int price[100005];
+int weight[100005];
+ll dp[1000][1000];
+
+
+ll  KnapSack(ll i,ll w)
+{
+  if(w==0 )return 1;
+  if(i==0)return 0;
+  if(dp[i][w]!=-1)return dp[i][w];
+
+   if(w>=weight[i])
+  {
+  dp[i][w]=KnapSack(i-1,w-weight[i]) + KnapSack(i-1,w) ;
+  }
+  else dp[i][w]=KnapSack(i-1,w);
+ 
+
+}
+
+
+void solve(ll test)
+{  
+  cin>>n>>w;
+  for(int i=1;i<=n;i++)
+  {
+    cin>>weight[i];
+  }
+
+   memset(dp,-1,sizeof(dp));
+
+ ll x=KnapSack(n,w);
+  cout<<x<<endl;
+
+
+}
+
+
+int main (){
+
+
+ #ifndef ONLINE_JUDGE
+ freopen ("input.txt","r", stdin);
+ freopen ("output.txt","w", stdout);
+ #endif
+  
+//int t;cin>>t;for(ll i=1;i<=t;i++)
+solve(1);
+
+return 0;
+ 
+}
